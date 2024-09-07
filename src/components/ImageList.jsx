@@ -43,14 +43,16 @@ function ImageList() {
   const [imageList, setImageList] = useState(images);
   const [choosedImageList, setChoosedImageList] = useState([]);
   const [currentScore, setCurrentScore] = useState(0);
-  if(!window.bestScore) {
+  if (!window.bestScore) {
     window.bestScore = 0;
   }
 
   return (
     <>
-      <h2>Score: {currentScore}</h2>
-      <h2>Best Score: {window.bestScore}</h2>
+      <div className="score-div">
+        <h2>Score: {currentScore}</h2>
+        <h2>Best Score: {window.bestScore}</h2>
+      </div>
       <div className="image-list">
         {images.map((image) => (
           <button
@@ -62,14 +64,14 @@ function ImageList() {
                 .map((image) => image.id)
                 .indexOf(image.id);
               if (choosedImageIndex >= 0) {
-                if(currentScore > window.bestScore) {
-                    window.bestScore = currentScore;
+                if (currentScore > window.bestScore) {
+                  window.bestScore = currentScore;
                 }
                 setCurrentScore(0);
               } else {
                 setChoosedImageList((choosedImageList) => {
-                    choosedImageList.push(image);
-                    return choosedImageList;
+                  choosedImageList.push(image);
+                  return choosedImageList;
                 });
                 setCurrentScore(currentScore + 1);
               }
